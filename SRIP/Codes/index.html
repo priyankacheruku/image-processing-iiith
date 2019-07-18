@@ -1,0 +1,77 @@
+<html>
+<head>
+	<title>Affine transformations</title>
+
+	<script type="text/javascript" src="script.js"></script>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body onload="slider();">
+	<div class="container">
+		<h1><center>Affine tranformations</h1></center>
+		<div class="row">
+			<div class="col-4">
+   	 			<div>
+      				<button name="select">Select image</button>
+      				<button name="reset">Reset</button>
+      				<button name="reset">RUN</button>
+    			</div>
+    			<br>
+    			<div class="tab">
+  					<button class="tablinks" onclick="openCity(event, 'single')">Single</button>
+	  				<button class="tablinks" onclick="openCity(event, 'multiple')">Multiple</button>
+				</div>
+
+				<div id="single" class="tabcontent">
+  					<div>
+  						<input type="radio" name="in" value="S">Scaling<br>
+   								&nbsp;&nbsp;<input type="radio" name="Scaling" value="up">UPscaling<br>
+			  					&nbsp;&nbsp;<input type="radio" name="Scaling" value="down">Downscaling<br>  
+			  					<div class="slidecontainer">
+ 									<input type="range" min="0" max="360" value="0" class="slider" id="x_scale">
+  									<p>x: <span id="x_scale_value"></span></p>
+								</div>
+			  				
+
+
+  						<input type="radio" name="in" value="R">Rotation<br>
+  							&nbsp;&nbsp;<span>ANGLE with anticlock rotation(0-360)</span>
+  							<div class="slidecontainer">
+ 								<input type="range" min="0" max="360" value="0" class="slider" id="angle">
+  								<p>Angle: <span id="angle_value"></span></p>
+							</div>
+
+  						<input type="radio" name="in" value="T">Translation<br>  
+  							<div class="slidecontainer">
+ 								&nbsp;&nbsp;<input type="range" min="0" max="360" value="0" class="slider" id="x_rotate">
+  								&nbsp;&nbsp;<p>X-axis: <span id="x_rotate_value"></span></p>
+
+								&nbsp;&nbsp;<input type="range" min="0" max="360" value="0" class="slider" id="y_rotate">
+  								&nbsp;&nbsp;<p>Y-axis: <span id="y_rotate_value"></span></p>
+							</div>
+
+  					</div>
+				</div>
+
+				<div id="multiple" class="tabcontent">
+	  				<h3>m</h3>
+  					<p>mul....</p> 
+				</div>
+			</div>
+			
+
+			<div class="col-8">
+				<div class="row pictures">
+			      	<div class="col-4" id="image_input">input image</div>
+      				<div class="col-4" id="image_output">output image</div>
+    			</div>
+    			<div class="row">
+    				select image
+    			</div>
+			</div>
+		</div>
+
+</div>
+</body>
+</html>
