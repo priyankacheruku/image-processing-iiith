@@ -1,6 +1,23 @@
+
+var input = {
+  "input":null,
+  "scaling": {  
+    "s_value":0
+  },
+  "rotation":{
+    "r_val":0
+  },
+  "translation":{
+    "x_val":0,
+    "y_val":0
+  },
+  "interpolation":"nearest"
+}
+
+
 var checkedValue;
 function openCity(evt,choice) {
-  if(checkedValue){
+ /* if(checkedValue){*/
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
@@ -12,18 +29,19 @@ function openCity(evt,choice) {
     }
     document.getElementById(choice).style.display = "block";
     evt.currentTarget.className += " active";
-  }
+  /*}
   else{
     alert("select image first");
-  }
+  }*/
 }
 function load(argument) {
   
-  var x_scale = document.getElementById("x_scale");
-  var x_scale_output = document.getElementById("x_scale_value");
-  x_scale_output.innerHTML = x_scale.value;
-  x_scale.oninput = function() {
-    x_scale_output.innerHTML = this.value;
+  var scale = document.getElementById("x_scale");
+  var scale_output = document.getElementById("x_scale_value");
+  scale_output.innerHTML = scale.value;
+  scale.oninput = function() {
+    scale_output.innerHTML = this.value;
+    input.scaling.s_value=this.value;
   }
 
   var angle_slider = document.getElementById("angle");
@@ -31,6 +49,7 @@ function load(argument) {
   angle_output.innerHTML = angle_slider.value;
   angle_slider.oninput = function() {
     angle_output.innerHTML = this.value;
+    input.rotation.r_val=this.value;
   }
 
   var x_rotate_slider = document.getElementById("x_rotate");
@@ -38,6 +57,7 @@ function load(argument) {
   x_rotate_output.innerHTML = x_rotate_slider.value;
   x_rotate_slider.oninput = function() {
     x_rotate_output.innerHTML = this.value;
+    input.translation.x_val=this.val;
   }
 
   var y_rotate_slider = document.getElementById("y_rotate");
@@ -46,6 +66,7 @@ function load(argument) {
 
   y_rotate_slider.oninput = function() {
     y_rotate_output.innerHTML = this.value;
+    input.translation.y_val=this.value;
   }
 
 
@@ -77,7 +98,7 @@ function getImageId(argument) {
   if(checkedValue){
      $(document).ready(function(){
         $('#select_image').modal('hide');
-        document.getElementById('input_image').src = "img"+checkedValue+".jpeg";
+        document.getElementById('input_image').src = "static/img/img"+checkedValue+".jpeg";
 
      });
   }
@@ -87,7 +108,7 @@ function getImageId(argument) {
 }
 
 function reset(argument) {
-  var c=confirm("will reset all values");
+  var c=confirm("reset all values");
   if(c){
     location.reload(true);   
   }
@@ -98,6 +119,7 @@ $(document).ready(function(){
   $("input[name='input_radio']").click(function(){
     var radioValue = $("input[name='input_radio']:checked").val();  
     if (radioValue==1) {
+      input.input="scaling";
       $('input[name="Scaling"]').removeAttr('disabled');
       $(".wrap1").css('opacity', '1');
       $('input[name="Rotation"]').attr('disabled', 'disabled');
@@ -107,6 +129,7 @@ $(document).ready(function(){
     }
  
     else if (radioValue==2) {
+      input.input="rotation";
       $('input[name="Scaling"]').attr('disabled', 'disabled');
       $(".wrap1").css('opacity', '.2');
       $('input[name="Rotation"]').removeAttr('disabled');
@@ -116,6 +139,7 @@ $(document).ready(function(){
 
     }
     else if(radioValue==3){
+      input.input="translation";
       $('input[name="Scaling"]').attr('disabled', 'disabled');
       $(".wrap1").css('opacity', '.2');
       $('input[name="Rotation"]').attr('disabled', 'disabled');
@@ -124,10 +148,33 @@ $(document).ready(function(){
       $(".wrap3").css('opacity', '1');
 
     }
+
   });
 
   $("input[name='Scaling']").click(function(){
     $('input[name="Scaling_value"]').removeAttr('disabled');
-      
   });
+
+  $("input[name='interpolation']").click(function(){
+    var interpolation = $("input[name='interpolation']:checked").val();  
+    input.interpolation=interpolation;
+  });
+
+
+  $("#run").click(function(){
+   /* $.ajax({
+      url: $SCRIPT_ROOT + '/apply_filter',
+      type:'POST',
+      data:input, 
+        success: function() {
+          alert('AJAX call was successful!');
+          alert('Data from the server');
+        },
+       error: function() {
+         alert('There was some error performing the AJAX call!');
+      }
+    });*/
+  });
+  
 });
+
