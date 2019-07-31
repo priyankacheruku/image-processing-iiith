@@ -1,22 +1,22 @@
-
-var input = {
+input = {
   "input":null,
   "scaling": {  
+    "scaling":null,
     "s_value":0
   },
-  "rotation":{
-    "r_val":0
-  },
+  "rotation":0,
+
   "translation":{
     "x_val":0,
     "y_val":0
   },
-  "interpolation":"nearest"
+  "interpolation":"nearest",
+  "img":0
 }
 
 
 var checkedValue;
-function openCity(evt,choice) {
+function openTab(evt,choice) {
  /* if(checkedValue){*/
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
@@ -36,8 +36,8 @@ function openCity(evt,choice) {
 }
 function load(argument) {
   
-  var scale = document.getElementById("x_scale");
-  var scale_output = document.getElementById("x_scale_value");
+  var scale = document.getElementById("scale");
+  var scale_output = document.getElementById("scale_value");
   scale_output.innerHTML = scale.value;
   scale.oninput = function() {
     scale_output.innerHTML = this.value;
@@ -49,7 +49,7 @@ function load(argument) {
   angle_output.innerHTML = angle_slider.value;
   angle_slider.oninput = function() {
     angle_output.innerHTML = this.value;
-    input.rotation.r_val=this.value;
+    input.rotation=this.value;
   }
 
   var x_rotate_slider = document.getElementById("x_rotate");
@@ -57,7 +57,8 @@ function load(argument) {
   x_rotate_output.innerHTML = x_rotate_slider.value;
   x_rotate_slider.oninput = function() {
     x_rotate_output.innerHTML = this.value;
-    input.translation.x_val=this.val;
+    input.translation.x_val=this.value;
+   
   }
 
   var y_rotate_slider = document.getElementById("y_rotate");
@@ -95,10 +96,12 @@ function load(argument) {
 function getImageId(argument) {
 
   checkedValue = $('.radio:checked').val();
+  input['img']='static/img/img'+checkedValue+'.jpeg';
   if(checkedValue){
      $(document).ready(function(){
         $('#select_image').modal('hide');
-        document.getElementById('input_image').src = "../img"+checkedValue+".jpeg";
+        document.getElementById('input_image').src = "static/img/img"+checkedValue+".jpeg";
+        document.getElementById('output_image').src = "";
 
      });
   }
@@ -108,7 +111,7 @@ function getImageId(argument) {
 }
 
 function reset(argument) {
-  var c=confirm("will reset all values");
+  var c=confirm("Will reset all values");
   if(c){
     location.reload(true);   
   }
@@ -119,7 +122,7 @@ $(document).ready(function(){
   $("input[name='input_radio']").click(function(){
     var radioValue = $("input[name='input_radio']:checked").val();  
     if (radioValue==1) {
-      input.input="scaling";
+      input['input']="scaling";
       $('input[name="Scaling"]').removeAttr('disabled');
       $(".wrap1").css('opacity', '1');
       $('input[name="Rotation"]').attr('disabled', 'disabled');
@@ -129,7 +132,7 @@ $(document).ready(function(){
     }
  
     else if (radioValue==2) {
-      input.input="rotation";
+      input['input']="rotation";
       $('input[name="Scaling"]').attr('disabled', 'disabled');
       $(".wrap1").css('opacity', '.2');
       $('input[name="Rotation"]').removeAttr('disabled');
@@ -139,7 +142,7 @@ $(document).ready(function(){
 
     }
     else if(radioValue==3){
-      input.input="translation";
+      input['input']="translation";
       $('input[name="Scaling"]').attr('disabled', 'disabled');
       $(".wrap1").css('opacity', '.2');
       $('input[name="Rotation"]').attr('disabled', 'disabled');
@@ -152,30 +155,54 @@ $(document).ready(function(){
   });
 
   $("input[name='Scaling']").click(function(){
+    input.scaling.scaling=$("input[name='Scaling']:checked").val();
+    //alert(input.scaling.scaling);
     $('input[name="Scaling_value"]').removeAttr('disabled');
+    var s=$("input[name='Scaling']:checked").val();    
+    if(s=="down"){
+      document.getElementById("scale").min=1;
+      document.getElementById("scale").max=100;
+      document.getElementById("scale").value=1;
+      document.getElementById("scale_value").innerHTML=1;
+
+    }
+    else if (s=="up") {
+      document.getElementById("scale").min=100;
+      document.getElementById("scale").max=200;
+      document.getElementById("scale").value=100;
+      document.getElementById("scale_value").innerHTML=100;
+
+    }
   });
 
   $("input[name='interpolation']").click(function(){
     var interpolation = $("input[name='interpolation']:checked").val();  
-    input.interpolation=interpolation;
+    //input.interpolation=interpolation;
   });
 
 
   $("#run").click(function(){
-  alert();
-   /* $.ajax({
-      url: $SCRIPT_ROOT + '/apply_filter',
-      type:'POST',
-      data:input, 
-        success: function() {
-          alert('AJAX call was successful!');
-          alert('Data from the server');
-        },
-       error: function() {
-         alert('There was some error performing the AJAX call!');
-      }
-    });*/
+ 
+   $.ajax({
+    type: "POST",
+    contentType: "application/json; charset=utf-8",
+    data: JSON.stringify(input),
+    url: "/apply_filter", 
+    /*success: function(data){
+      alert('success '+data['interpolation']);
+      //code to print output image
+    },
+    error: function(){
+      alert('failure');
+    },
+    dataType: "json"*/
+  }).done(function (data) {
+      $("#output_image").attr("src", "static/img/result.jpeg?random="+new Date().getTime());
+      //document.getElementById('output_image').src = "static/img/result.jpeg";
+     alert("ok")
+    });
+   //alert(JSON.stringify(input));
+ 
   });
 
 });
-

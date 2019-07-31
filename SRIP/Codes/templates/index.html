@@ -7,7 +7,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
-	<script type="text/javascript" src="static/js/script.js"></script>
+	<!--<script type="text/javascript" src="static/js/script.js"></script>-->
+  <script type=text/javascript src="{{ url_for('static', filename='js/script.js', version='12052017') }}">
+    
+  </script>
+
 	<link rel="stylesheet" type="text/css" href="static/css/style.css">
 </head>
 
@@ -24,8 +28,8 @@
     			</div>
     			<br>
     			<div class="tab">
-  					<button class="tablinks" onclick="openCity(event, 'single')">Single</button>
-	  				<button class="tablinks" onclick="openCity(event, 'multiple')">Multiple</button>
+  					<button class="tablinks" onclick="openTab(event, 'single')">Single</button>
+	  				<button class="tablinks" onclick="openTab(event, 'multiple')">Multiple</button>
 				  </div>
 
 				<div id="single" class="tabcontent">
@@ -36,8 +40,8 @@
    						&nbsp;&nbsp;<input type="radio" name="Scaling" value="up" disabled="true">Upscaling<br>
 			  			&nbsp;&nbsp;<input type="radio" name="Scaling" value="down" disabled="true">Downscaling<br>  
 			  		 	 <div class="slidecontainer">
- 							    <input name="Scaling_value"type="range" min="0" max="5" value="0" class="slider" id="x_scale" disabled="true">
-  						    <p>x: <span id="x_scale_value"></span></p>
+ 							    <input name="Scaling_value"type="range" min="" max="" value="100" class="slider" id="scale" disabled="true">
+  						    <p>x: <span id="scale_value"></span></p>
 							 </div>
 			  	  </div>
           </div>
@@ -60,10 +64,10 @@
   				<input type="radio" name="input_radio" value="3">Translation<br>  
   					<div class="wrap3">
   						<div class="slidecontainer">
- 									&nbsp;&nbsp;<input name="Translation" type="range" min="0" max="300" value="0" class="slider" id="x_rotate" disabled="true">
+ 									&nbsp;&nbsp;<input name="Translation" type="range" min="0" max="400" value="0" class="slider" id="x_rotate" disabled="true">
   									&nbsp;&nbsp;<p>X-axis: <span id="x_rotate_value"></span></p>
 
-									&nbsp;&nbsp;<input name="Translation" type="range" min="0" max="300" value="0" class="slider" id="y_rotate" disabled="true">
+									&nbsp;&nbsp;<input name="Translation" type="range" min="0" max="400" value="0" class="slider" id="y_rotate" disabled="true">
   									&nbsp;&nbsp;<p>Y-axis: <span id="y_rotate_value"></span></p>
 							</div>
 						</div>
@@ -82,10 +86,11 @@
 			      	<div class="col-sm-6" id="image_input">input image
 			      		<img src="" alt="select image" id="input_image" height="200" width="200"> 
               </div>
-      				<div class="col-sm-6" id="image_output">output image</div>
-    			</div>
-    			<div class="row">
-    				select image
+      				<div class="col-sm-6" id="image_output">output image
+                <img src=""
+                alt="select image" id="output_image" height="200" width="200">{{me}}
+              </div>
+
     			</div>
 			</div>
 		
@@ -153,6 +158,7 @@
 </div>
 <!--modal end-->
 </div><!--container-->
+
 
 </body>
 </html>
