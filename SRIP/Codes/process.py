@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 import os
 import imutils
+
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
@@ -14,9 +15,11 @@ def apply_filter():
 
     #get data in the form of json
     data = request.get_json()
+    
     #read image
     img = cv.imread(data['img'],0)
 
+    #read json values to pyhon variables
     interpolation = data['interpolation']
     height, width = img.shape[:2]
 
@@ -26,8 +29,9 @@ def apply_filter():
         
     elif(interpolation=="bicubic"):
         res = cv.resize(img,(2*width, 2*height), interpolation = cv.INTER_CUBIC)
-    else:
+    elif(interpolation=="bilinear"):
         res = cv.resize(img,(2*width, 2*height), interpolation = cv.INTER_LINEAR)
+    
     #processing
     if(data['input']=="scaling"):
         scale_percent =int(data["scaling"]["s_value"])
@@ -57,17 +61,7 @@ def apply_filter():
 def first():
     return render_template('index.html')
 
-    """
-    Add headers to both force latest IE rendering engine or Chrome Frame,
-    and also to cache the rendered page for 10 minutes.
-    """
-   # r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate, post-check=0, pre-check=0, max-age=0"
-    #r.headers["Pragma"] = "no-cache"
-    #r.headers["Expires"] = '-1'
-    #r.headers['Cache-Control'] = 'public, max-age=0'
-    #if 'Cache-Control' not in r.headers:
-     #   r.headers['Cache-Control'] = 'no-store'
-    #return r
+
 if app.config["DEBUG"]:
     @app.after_request
     def after_request(response):

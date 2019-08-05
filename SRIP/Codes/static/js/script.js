@@ -17,7 +17,7 @@ input = {
 
 var checkedValue;
 function openTab(evt,choice) {
- /* if(checkedValue){*/
+ if(checkedValue){
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
@@ -29,10 +29,10 @@ function openTab(evt,choice) {
     }
     document.getElementById(choice).style.display = "block";
     evt.currentTarget.className += " active";
-  /*}
+  }
   else{
     alert("select image first");
-  }*/
+  }
 }
 function load(argument) {
   
@@ -96,11 +96,11 @@ function load(argument) {
 function getImageId(argument) {
 
   checkedValue = $('.radio:checked').val();
-  input['img']='static/img/img'+checkedValue+'.jpeg';
+  input['img']='static/img/IMG'+checkedValue+'.png';
   if(checkedValue){
      $(document).ready(function(){
         $('#select_image').modal('hide');
-        document.getElementById('input_image').src = "static/img/img"+checkedValue+".jpeg";
+        document.getElementById('input_image').src = "static/img/IMG"+checkedValue+".png";
         document.getElementById('output_image').src = "";
 
      });
@@ -182,27 +182,25 @@ $(document).ready(function(){
 
 
   $("#run").click(function(){
- 
-   $.ajax({
-    type: "POST",
-    contentType: "application/json; charset=utf-8",
-    data: JSON.stringify(input),
-    url: "/apply_filter", 
-    /*success: function(data){
-      alert('success '+data['interpolation']);
-      //code to print output image
-    },
-    error: function(){
-      alert('failure');
-    },
-    dataType: "json"*/
-  }).done(function (data) {
-      $("#output_image").attr("src", "static/img/result.jpeg?random="+new Date().getTime());
-      //document.getElementById('output_image').src = "static/img/result.jpeg";
-     alert("ok")
-    });
-   //alert(JSON.stringify(input));
- 
+    if(checkedValue){
+      $.ajax({
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(input),
+        url: "/apply_filter", 
+        success: function(data){
+          $("#output_image").attr("src", "static/img/result.jpeg?random="+new Date().getTime());
+        },
+        error: function(){
+          alert('failure');
+        }
+        /*dataType: "json"*/
+      });
+    }
+    else{
+      alert("select image first")
+    }
+  
   });
 
 });
