@@ -9,19 +9,25 @@
 
 	<!--<script type="text/javascript" src="static/js/script.js"></script>-->
   <script type=text/javascript src="{{ url_for('static', filename='js/script.js', version='12052017') }}">
+
     
   </script>
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
 
-	<link rel="stylesheet" type="text/css" href="static/css/style.css">
+	<!--<link rel="stylesheet" type="text/css" href="static/css/style.css">-->
 </head>
 
-<body onload="load();">
+<body onload="load();" >
 	<div class="container">
-		<h1><center>Affine tranformations</center></h1>
+		<div id="topbar"> <!--Heading-->
+      <div id="iiit"><img src="static/img/iiit.png" width="100" height="70"></div>
+      <div id="heading"><h1>Virtual Lab for IMAGE PROCESSING</h1></div>
+      <div id="sub_heading"><h3>Affine transformation Experiment</h3></div>
+     </div>
 		<div class="row">
 
 			<div class="col-sm-4">
-   	 			<div>
+   	 			<div id="top_bottons">
       				<button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#select_image">Select image</button>
       				<button name="reset" class="btn btn-primary" onclick="reset();">Reset</button>
       				<button name="run" class="btn btn-primary" id="run" >RUN</button>
@@ -82,13 +88,16 @@
 
 			<div class="col-sm-8">
 				<div class="row pictures">
-			      	<div class="col-sm-6" id="image_input">input image
-			      		<img src="" alt="select image" id="input_image" height="200" width="200"> 
+			      	<div class="col-sm-6" id="image_input">
+			      		<img src="static/img/blank.png" alt="select image" id="input_image" height="300" width="300"> 
+                <span >input image</span>
               </div>
-      				<div class="col-sm-6" id="image_output">output image
-                <img src=""
-                alt="select image" id="output_image" height="200" width="200">{{me}}
+              
+      				<div class="col-sm-6" id="image_output">
+                <img src="static/img/blank.png" alt="select image" id="output_image" height="300" width="300">
+                <span >output image</span>
               </div>
+              
 
     			</div>
 			</div>

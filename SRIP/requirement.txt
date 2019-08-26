@@ -5,7 +5,9 @@
 2.cv2
 	-"https://pypi.org/project/opencv-python/" follow the instructions
 3.matplotlib 
-	-https://matplotlib.org/3.1.1/users/installing.html
+	-"https://matplotlib.org/3.1.1/users/installing.html"
+	- for ubuntu
+		"https://askubuntu.com/questions/537264/installing-matplotlib-on-ubuntu-14-04-after-installing-python-3-with-pyenv"
 4.imutils
 	-for windows
 		"https://stackoverflow.com/questions/34161318/how-to-install-imutils-0-2-for-python-in-windows-07"

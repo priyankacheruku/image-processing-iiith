@@ -164,6 +164,7 @@ $(document).ready(function(){
       document.getElementById("scale").max=100;
       document.getElementById("scale").value=1;
       document.getElementById("scale_value").innerHTML=1;
+      input.scaling.s_value=1;
 
     }
     else if (s=="up") {
@@ -171,6 +172,7 @@ $(document).ready(function(){
       document.getElementById("scale").max=200;
       document.getElementById("scale").value=100;
       document.getElementById("scale_value").innerHTML=100;
+      input.scaling.s_value=100;
 
     }
   });
@@ -192,7 +194,7 @@ $(document).ready(function(){
           $("#output_image").attr("src", "static/img/result.jpeg?random="+new Date().getTime());
         },
         error: function(){
-          alert('failure');
+          alert('failure because of not selecting values ');
         }
         /*dataType: "json"*/
       });

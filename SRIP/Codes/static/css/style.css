@@ -1,7 +1,45 @@
-
+body{
+  background-color: black;
+  font-family: Titillium Web;
+  color: white;
+}
+#iiit{
+  position: absolute;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+#topbar{
+    position: relative;
+    background-color: #3a3a3a;
+    height: 110px;
+    width: 800px;
+    margin-left:150px ;
+    color: #C2C2C2;
+    margin-top:5px;
+    margin-bottom: 5px;
+    
+}
+#heading{
+  text-align: center;
+  padding-top: 10px;
+  color: #C2C2C2;
+    font-family: Titillium Web;
+  font-size: .8em;
+    margin-top: 5px;
+    padding-top: 1px;
+    padding-left: 50px;    
+}
+#sub_heading{
+    margin-top: -15px;
+    margin-left: 300px;
+}
 .container{
 	width: 90%;
-	margin-top: 50px;
+	margin-top: 0px;
+}
+#top_bottons{
+ padding-left:30px;
+ padding-top:5px;
 }
 .input{
 	height: 100px;
@@ -11,6 +49,7 @@
   overflow: hidden;
   border: 1px solid #ccc;
   background-color: #f1f1f1;
+  color: black;
 }
 
 /* Style the buttons inside the tab */
@@ -88,11 +127,15 @@
 #image_input{
 
 	float:left;
-	height: 300px;
-	width: 300px;
-
-	border: 1px solid red;
+	height: 330px;
+	width: 330px;
 	margin: 10px;
+}
+#image_output{
+  border: 2px solid yellow;
+}
+#image_input{
+  border: 2px solid blue;
 }
 ul {
   list-style-type: none;
